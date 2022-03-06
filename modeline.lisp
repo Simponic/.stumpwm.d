@@ -1,14 +1,16 @@
 (ql:quickload :parse-float)
 
-(defun make-bar (percentage-function)
+(defun make-bar (label percentage-function)
   (let
       ((percentage (funcall percentage-function)))
-    (concat "\[" (bar percentage 5 #\X #\=) "\]" (format nil "(~a\%)" percentage))))
+    (concat label ": \[" (bar percentage 5 #\X #\=) "\]" (format nil "(~a\%)" percentage))))
 
 (defun get-volume ()
+  ;; Return the volume as a percentage
   (parse-integer (run-shell-command "pamixer --get-volume" t)))
 
 (defun get-battery ()
+  ;; Return the current battery level as a percentage
   (parse-integer (run-shell-command "printf $(acpi | grep -o '[[:digit:]]*\%')" t)))
 
 (setf *window-format* "%m%n%s%c")
@@ -16,10 +18,11 @@
 (setf *mode-line-timeout* 1)
 (setf *screen-mode-line-format*
       (list
-        "[^B%n^b]  //  %g  \\\\  %W  // ^> VOL: "
-        '(:eval (make-bar #'get-volume))
-        " BAT: "
-        '(:eval (make-bar #'get-battery))
+        "[^B%n^b]  //  %g  \\\\  %W  // ^> "
+        '(:eval (make-bar "VOL" #'get-volume))
+        (cond
+          (*laptop* '(:eval "BAT" (make-bar #'get-battery)))
+          (t ""))
         "  \\\\  %d"
        ))
 

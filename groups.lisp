@@ -1,4 +1,4 @@
 (gnew "www")
-(gnew "chat")
-(gnew "sh")
 (gnew "txt")
+(gnew "sh")
+(gnew "chat")

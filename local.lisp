@@ -1,2 +1,2 @@
-(defparameter *laptop* t)
+(defparameter *laptop* nil)
 
