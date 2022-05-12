@@ -1,0 +1,10 @@
+* .stumpwm.d
+This is my stumpwm config
+
+** Dealing with laptops and desktops
+Since I have a laptop and desktop using stumpwm, ~local.lisp~ contains configuration to the local machine, but you'll want to make sure you've updated its index on git to "--assume-unchanged":
+
+~git update-index --assume-unchanged~
+
+A better way to go about this would be to add a configuration string for each hostname of my machines like I do in my [[https://github.com/Simponic/.emacs.d][.emacs.d]] but it works for now, so I'm not touching it :)
+
