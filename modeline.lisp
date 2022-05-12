@@ -11,11 +11,11 @@
 
 (defun get-battery ()
   ;; Return the current battery level as a percentage
-  (parse-integer (run-shell-command "printf $(acpi | grep -o '[[:digit:]]*\%')" t)))
+  (parse-integer (run-shell-command "acpi | awk -F ',' '{print $2}' | grep -o '[[:digit:]]*'" t)))
 
 (defun get-wifi ()
   ;; Return wifi signal strength as a percentage
-  (parse-integer (run-shell-command "awk 'NR==3 { printf("%i"), $3/70*100 } /proc/net/wireless'")))
+  (parse-integer (run-shell-command "awk 'NR==3 { printf(\"%i\"), $3/70*100 }' /proc/net/wireless" t)))
 
 (setf *window-format* "%m%n%s%c")
 (setf *time-modeline-string* "%a %b %e %k:%M:%S")
@@ -24,16 +24,18 @@
       (list
         "[^B%n^b]  //  %g  \\\\  %W  // ^> "
         '(:eval (make-bar "VOL" #'get-volume))
-        (cond
-          (*laptop* '(:eval "BAT" (make-bar #'get-battery)))
-          (t ""))
+        " "
         '(:eval (make-bar "WIFI" #'get-wifi))
+        " "
+        (cond
+          (*laptop* '(:eval (make-bar "BAT" #'get-battery)))
+          (t ""))
         "  \\\\  %d"
        ))
 
 (setf *bar-med-color* "^B^1") ;; Red
-(setf *bar-hi-color* "^B^2") ;; Green
-(setf *bar-crit-color* "^B^3") ;; Yellow
+(setf *bar-crit-color* "^B^2") ;; Green
+(setf *bar-hi-color* "^B^3") ;; Yellow
 
 ;; Show on each screen
 (mapcar
