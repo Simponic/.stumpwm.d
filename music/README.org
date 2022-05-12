@@ -1,6 +1,8 @@
 #+TITLE: YouTube Client in StumpWM
 #+AUTHOR: Logan Hunt
 
+THIS IS A TODO PROJECT. I LITERALLY HAVE NOT EVEN STARTED AND MAY NOT EVER LOL
+
 * Installing
 ** Dependencies
 To build this project, you need:
