@@ -2,8 +2,8 @@
 
 (load-module "swm-gaps")
 
-(setf swm-gaps:*head-gaps-size* 0)
-(setf swm-gaps:*inner-gaps-size* 0)
-(setf swm-gaps:*outer-gaps-size* 8)
+(setf swm-gaps:*head-gaps-size* 0
+      swm-gaps:*inner-gaps-size* 5
+      swm-gaps:*outer-gaps-size* 5)
 
 (swm-gaps:toggle-gaps)

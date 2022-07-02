@@ -19,4 +19,4 @@
 (define-key *top-map* (kbd "s-ISO_Left_Tab") "fprev")
 
 (define-key *root-map* (kbd "C-t") "exec alacritty")
-(define-key *root-map* (kbd "b") "exec brave")
+(define-key *root-map* (kbd "b") "exec firefox")
