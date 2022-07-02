@@ -14,7 +14,7 @@
 
 (defun get-wifi ()
   ;; Return wifi signal strength as a percentage
-  (parse-integer (run-shell-command "awk 'NR==3 { printf(\"%i\"), $3/70*100 }' /proc/net/wireless" t)))
+  (parse-integer (run-shell-command "printf $(iwconfig 2> /dev/null | grep -Pio '(?<=Link Quality=)\d+')" t)))
 
 (defun get-ip ()
   ;; Return the current ip of the default network interface
