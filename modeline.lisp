@@ -10,7 +10,7 @@
 
 (defun get-battery ()
   ;; Return the current battery level as a percentage
-  (parse-integer (run-shell-command "acpi | awk -F ',' '{print $2}' | grep -Po '\d+'" t)))
+  (parse-integer (run-shell-command "acpi | awk -F ',' '{print $2}' | grep -Po '\\d+'" t)))
 
 (defun get-wifi ()
   ;; Return wifi signal strength as a percentage
