@@ -1,3 +1,4 @@
+(grename "misc")
 (gnew "www")
 (gnew "txt")
 (gnew "sh")
