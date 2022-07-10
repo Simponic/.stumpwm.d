@@ -1,5 +1,8 @@
 (in-package :stumpwm)
 
+;; Utils and helpers
+(load "~/.stumpwm.d/utils.lisp")
+
 ;; Local configuration
 (load "~/.stumpwm.d/local.lisp")
 
