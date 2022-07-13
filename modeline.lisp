@@ -1,9 +1,7 @@
-(load-module "cpu")
-
-(defun make-bar (label percentage-function)
+(defun make-bar (label percentage-function &optional (format-string "(~a\%)"))
   (let
       ((percentage (funcall percentage-function)))
-    (concat label ": \[" (bar percentage 5 #\X #\=) "\]" (format nil "(~a\%)" percentage))))
+    (concat label ": \[" (bar percentage 5 #\X #\=) "\]" (format nil format-string percentage))))
 
 (defun get-volume ()
   ;; Return the volume as a percentage
@@ -17,6 +15,10 @@
   ;; Return the current ip of the default network interface
   (run-shell-command "printf $(ifconfig $(route | grep '^default' | grep -o '[^ ]*$') | grep -Po '\\d+\\.\\d+\\.\\d+\\.\\d+' | head -n1)" t))
 
+(defun get-cpu-temp ()
+  ;; Return current temperature of the first cpu package (core)
+  (parse-integer (run-shell-command "sensors -A | grep 'Package' | awk '{print $4+0}'" t)))
+        
 (setf *status-seperator* " ^3|^] ")
 (setf *mode-line* '(
                     "[^B%n^b]"
@@ -25,7 +27,7 @@
                     "^>"
                     "%d"
                     (:eval (make-bar "VOL" #'get-volume))
-                    ("%C")
+                    (:eval (make-bar "TEMP" #'get-cpu-temp "(~a°C)"))
                     (:eval (get-ip))))
 (if (is-laptop)
     (push '(:eval (make-bar "BAT" #'get-battery)) (cdr (last *mode-line*))))
