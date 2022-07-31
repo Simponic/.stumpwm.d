@@ -12,8 +12,8 @@
 (define-key *top-map* (kbd "s-u") "exec pamixer -i 5")
 (define-key *top-map* (kbd "s-d") "exec pamixer -d 5")
 
-(define-key *top-map* (kbd "s-w") "exec sudo /usr/bin/light -A 5")
-(define-key *top-map* (kbd "s-s") "exec sudo /usr/bin/light -U 5")
+(define-key *top-map* (kbd "s-w") "exec xbacklight -inc 5")
+(define-key *top-map* (kbd "s-s") "exec xbacklight -dec 5")
 
 (define-key *top-map* (kbd "s-TAB") "fnext")
 (define-key *top-map* (kbd "s-ISO_Left_Tab") "fprev")
